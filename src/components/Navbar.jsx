@@ -21,7 +21,7 @@ function Navbar() {
           </span>
         </Link>
 
-        {/* NAVIGATION LINKS */}
+        
         <div className="hidden items-center gap-2 lg:flex">
           <NavLink to="/" className={navLinkClass}>
             Home
@@ -40,7 +40,7 @@ function Navbar() {
           </NavLink>
         </div>
 
-        {/* LOGIN AND SIGN UP */}
+        
         <div className="flex items-center gap-3">
           <Link
             to="/login"

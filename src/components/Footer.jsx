@@ -5,7 +5,7 @@ function Footer() {
     <footer className="border-t border-[#293548] bg-[#080B12] px-6 py-14 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 lg:grid-cols-4">
 
-        {/* BRAND */}
+        
         <div>
           <Link to="/" className="text-2xl font-bold">
             Event<span className="text-[#FF8A3D]">Hub</span>
@@ -17,7 +17,7 @@ function Footer() {
           </p>
         </div>
 
-        {/* QUICK LINKS */}
+        
         <div>
           <h3 className="text-lg font-bold">Quick Links</h3>
 
@@ -40,7 +40,7 @@ function Footer() {
           </div>
         </div>
 
-        {/* CONTACT */}
+        
         <div>
           <h3 className="text-lg font-bold">Contact Us</h3>
 
@@ -58,7 +58,7 @@ function Footer() {
           </div>
         </div>
 
-        {/* SOCIAL MEDIA */}
+        
         <div>
           <h3 className="text-lg font-bold">Follow Us</h3>
 
@@ -79,7 +79,7 @@ function Footer() {
 
       </div>
 
-      {/* BOTTOM */}
+      
       <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-center gap-3 border-t border-[#293548] pt-7 text-center text-sm text-[#64748B]">
         <p>
           © 2026 EventHub. All rights reserved.

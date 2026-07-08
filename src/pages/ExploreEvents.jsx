@@ -70,7 +70,7 @@ function ExploreEvents() {
 
   return (
     <main className="min-h-screen bg-[#0B0F19] px-6 py-12 text-white">
-      <div className="mx-auto max-w-[1500px]">
+      <div className="mx-auto max-w-375">
 
         {/* PAGE HEADING */}
         <div className="mb-8">

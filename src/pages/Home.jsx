@@ -8,9 +8,9 @@ function Home() {
 
       {/* HOME HERO SECTION */}
       <section className="relative">
-        <div className="absolute left-0 top-0 h-[450px] w-[450px] rounded-full bg-[#FF8A3D]/10 blur-[150px]" />
+        <div className="absolute left-0 top-0 h-112.5 w-112.5 rounded-full bg-[#FF8A3D]/10 blur-[150px]" />
 
-        <div className="relative mx-auto min-h-[650px] max-w-7xl px-6 py-20">
+        <div className="relative mx-auto min-h-162.5 max-w-7xl px-6 py-20">
 
           {/* BADGE */}
           <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-[#FF8A3D]/40 bg-[#FF8A3D]/10 px-5 py-3 font-bold tracking-wide text-[#FFA15F]">
