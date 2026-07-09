@@ -10,7 +10,10 @@ function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-[#F3E8D8] bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
 
-        <Link to="/" className="font-heading text-2xl font-bold text-[#38340E]">
+        <Link
+          to="/"
+          className="font-heading text-2xl font-bold text-[#38340E]"
+        >
           Event<span className="text-[#FFA13D]">Hub</span>
         </Link>
 
@@ -27,8 +30,11 @@ function Navbar() {
             Past Events
           </NavLink>
 
-          <NavLink to="/dashboard" className={navLinkClass}>
-            Organizer Dashboard
+          <NavLink
+            to="/organizer-login"
+            className={navLinkClass}
+          >
+            Create Event
           </NavLink>
         </div>
 

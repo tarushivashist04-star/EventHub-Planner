@@ -59,6 +59,50 @@ function EventDetails() {
     return;
   }
 
+  const currentUser = JSON.parse(
+    localStorage.getItem("eventhub-current-user")
+  );
+
+  if (!currentUser) {
+    alert("Please login before registering for an event.");
+    return;
+  }
+
+  const savedTickets = JSON.parse(
+    localStorage.getItem("eventhub-my-tickets") || "[]"
+  );
+
+  const newTicket = {
+    ticketId: `EVH-${Date.now()}`,
+    userId: currentUser.uid,
+    userEmail: currentUser.email,
+
+    event: {
+      id: event.id,
+      title: event.title,
+      image: event.image,
+      category: event.category,
+      displayDate: event.displayDate,
+      time: event.time,
+      venue: event.venue,
+      club: event.club,
+    },
+
+    attendee: {
+      fullName,
+      email,
+      studentId,
+      phone,
+    },
+
+    registeredAt: new Date().toISOString(),
+  };
+
+  localStorage.setItem(
+    "eventhub-my-tickets",
+    JSON.stringify([newTicket, ...savedTickets])
+  );
+
   setIsRegistered(true);
 }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Search } from "lucide-react";
 import EventCard from "../components/EventCard";
 import events from "../data/events";
 
@@ -9,22 +10,73 @@ function ExploreEvents() {
   const [club, setClub] = useState("All");
   const [sortBy, setSortBy] = useState("upcoming");
 
+  // GET ORGANIZER EVENTS FROM LOCAL STORAGE
+  const savedOrganizerEvents = JSON.parse(
+    localStorage.getItem("eventhub-dashboard-events") || "[]"
+  );
+
+  // CONVERT ORGANIZER EVENTS TO EVENTCARD FORMAT
+  const organizerEvents = savedOrganizerEvents.map((event) => ({
+    ...event,
+
+    // Keep a unique ID
+    id: `organizer-${event.id}`,
+
+    // Dashboard uses "seats"
+    // EventCard uses "capacity"
+    capacity: Number(event.seats || 0),
+
+    // Dashboard uses "registrations"
+    // EventCard uses "registered"
+    registered: Number(event.registrations || 0),
+
+    // EventCard needs displayDate
+    displayDate: event.date
+      ? new Date(`${event.date}T00:00:00`).toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }
+        )
+      : "",
+
+    // EventCard needs one time field
+    time:
+      event.startTime && event.endTime
+        ? `${event.startTime} - ${event.endTime}`
+        : event.startTime || "",
+
+    // Organizer name for filter and card
+    club: "EventHub Organizer",
+  }));
+
+  // COMBINE NORMAL EVENTS + ORGANIZER EVENTS
+  const allEvents = [...organizerEvents, ...events];
+
   const categories = [
     "All",
-    ...new Set(events.map((event) => event.category)),
+    ...new Set(allEvents.map((event) => event.category)),
   ];
 
   const clubs = [
     "All",
-    ...new Set(events.map((event) => event.club)),
+    ...new Set(allEvents.map((event) => event.club)),
   ];
 
-  const filteredEvents = events
+  const filteredEvents = allEvents
     .filter((event) => {
       const matchesSearch =
-        event.title.toLowerCase().includes(search.toLowerCase()) ||
-        event.venue.toLowerCase().includes(search.toLowerCase()) ||
-        event.club.toLowerCase().includes(search.toLowerCase());
+        event.title
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        event.venue
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
+        event.club
+          .toLowerCase()
+          .includes(search.toLowerCase());
 
       const matchesCategory =
         category === "All" || event.category === category;
@@ -81,15 +133,15 @@ function ExploreEvents() {
         </div>
       </section>
 
-
       {/* SEARCH BAR */}
       <section className="bg-white px-6 pb-10">
         <div className="mx-auto max-w-7xl">
 
           <div className="relative">
-            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-lg">
-              🔍
-            </span>
+            <Search
+              size={21}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-[#6D6131]"
+            />
 
             <input
               type="text"
@@ -103,12 +155,11 @@ function ExploreEvents() {
         </div>
       </section>
 
-
       {/* MAIN CONTENT */}
       <section className="px-6 py-14">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[260px_1fr]">
 
-          {/* ================= FILTER SIDEBAR ================= */}
+          {/* FILTER SIDEBAR */}
           <aside className="h-fit rounded-2xl border border-[#F3E8D8] bg-white p-6 shadow-sm lg:sticky lg:top-28">
 
             <div className="flex items-center justify-between">
@@ -125,7 +176,6 @@ function ExploreEvents() {
               </button>
             </div>
 
-
             {/* CATEGORY FILTER */}
             <div className="mt-7">
               <label className="font-heading text-sm font-semibold text-[#38340E]">
@@ -134,7 +184,9 @@ function ExploreEvents() {
 
               <select
                 value={category}
-                onChange={(event) => setCategory(event.target.value)}
+                onChange={(event) =>
+                  setCategory(event.target.value)
+                }
                 className="mt-3 w-full rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm text-[#38340E] outline-none transition focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
               >
                 {categories.map((item) => (
@@ -144,7 +196,6 @@ function ExploreEvents() {
                 ))}
               </select>
             </div>
-
 
             {/* DATE FILTER */}
             <div className="mt-6">
@@ -162,7 +213,6 @@ function ExploreEvents() {
               />
             </div>
 
-
             {/* CLUB FILTER */}
             <div className="mt-6">
               <label className="font-heading text-sm font-semibold text-[#38340E]">
@@ -171,7 +221,9 @@ function ExploreEvents() {
 
               <select
                 value={club}
-                onChange={(event) => setClub(event.target.value)}
+                onChange={(event) =>
+                  setClub(event.target.value)
+                }
                 className="mt-3 w-full rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm text-[#38340E] outline-none transition focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
               >
                 {clubs.map((item) => (
@@ -182,8 +234,7 @@ function ExploreEvents() {
               </select>
             </div>
 
-
-            {/* ACTIVE FILTER INFORMATION */}
+            {/* RESULT INFORMATION */}
             <div className="mt-7 rounded-xl bg-[#FFF9F2] p-4">
               <p className="text-sm leading-6 text-[#6D6131]">
                 Showing{" "}
@@ -196,8 +247,7 @@ function ExploreEvents() {
 
           </aside>
 
-
-          {/* ================= EVENTS AREA ================= */}
+          {/* EVENTS AREA */}
           <div>
 
             {/* RESULT COUNT + SORT */}
@@ -213,8 +263,6 @@ function ExploreEvents() {
                 </p>
               </div>
 
-
-              {/* SORT */}
               <div className="flex items-center gap-3">
                 <label className="text-sm text-[#6D6131]">
                   Sort by
@@ -222,7 +270,9 @@ function ExploreEvents() {
 
                 <select
                   value={sortBy}
-                  onChange={(event) => setSortBy(event.target.value)}
+                  onChange={(event) =>
+                    setSortBy(event.target.value)
+                  }
                   className="rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm font-medium text-[#38340E] outline-none transition focus:border-[#FFA13D]"
                 >
                   <option value="upcoming">
@@ -237,7 +287,6 @@ function ExploreEvents() {
 
             </div>
 
-
             {/* EVENT CARDS */}
             {filteredEvents.length > 0 ? (
               <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -249,13 +298,12 @@ function ExploreEvents() {
                 ))}
               </div>
             ) : (
-
-              /* NO EVENTS FOUND */
               <div className="rounded-2xl border border-[#F3E8D8] bg-white px-6 py-20 text-center shadow-sm">
 
-                <div className="text-5xl">
-                  🔍
-                </div>
+                <Search
+                  size={48}
+                  className="mx-auto text-[#E56703]"
+                />
 
                 <h3 className="font-heading mt-5 text-2xl font-semibold text-[#38340E]">
                   No events found
@@ -278,7 +326,6 @@ function ExploreEvents() {
             )}
 
           </div>
-
         </div>
       </section>
 
