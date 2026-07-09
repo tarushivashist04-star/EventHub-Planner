@@ -3,21 +3,17 @@ import { Link, NavLink } from "react-router-dom";
 function Navbar() {
   const navLinkClass = ({ isActive }) =>
     isActive
-      ? "rounded-xl border border-[#FF8A3D]/40 bg-[#FF8A3D]/10 px-5 py-3 font-semibold text-[#FF8A3D]"
-      : "px-5 py-3 font-semibold text-[#CBD5E1] hover:text-[#FF8A3D]";
+      ? "rounded-xl border border-[#FFA13D]/40 bg-[#FFA13D]/10 px-5 py-3 font-medium text-[#E56703]"
+      : "px-5 py-3 font-medium text-[#38340E] transition hover:text-[#E56703]";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#080B12]/70 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-[#F3E8D8] bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
 
-        {/* LOGO */}
-        <Link to="/" className="flex items-center gap-3">
-          <span className="text-2xl font-bold text-white">
-            Event<span className="text-[#FF8A3D]">Hub</span>
-          </span>
+        <Link to="/" className="font-heading text-2xl font-bold text-[#38340E]">
+          Event<span className="text-[#FFA13D]">Hub</span>
         </Link>
 
-        {/* NAVIGATION LINKS */}
         <div className="hidden items-center gap-2 lg:flex">
           <NavLink to="/" className={navLinkClass}>
             Home
@@ -36,18 +32,17 @@ function Navbar() {
           </NavLink>
         </div>
 
-        {/* LOGIN AND SIGN UP */}
         <div className="flex items-center gap-3">
           <Link
             to="/login"
-            className="rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition hover:border-[#FF8A3D] hover:text-[#FF8A3D]"
+            className="rounded-xl border border-[#F3E8D8] px-6 py-3 font-semibold text-[#38340E] transition hover:border-[#FFA13D] hover:text-[#E56703]"
           >
             Login
           </Link>
 
           <Link
             to="/register"
-            className="rounded-xl bg-[#FF8A3D] px-6 py-3 font-bold text-white transition hover:bg-[#FFA15F]"
+            className="rounded-xl bg-[#FFA13D] px-6 py-3 font-semibold text-white transition hover:bg-[#E56703]"
           >
             Sign Up
           </Link>

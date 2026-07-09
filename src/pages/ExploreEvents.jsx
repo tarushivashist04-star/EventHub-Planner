@@ -11,169 +11,169 @@ function ExploreEvents() {
 
   const categories = [
     "All",
-    "Technology",
-    "Music",
-    "Arts",
-    "Business",
-    "Sports",
-    "Workshop",
-    "Competition",
-    "Trials",
+    ...new Set(events.map((event) => event.category)),
   ];
 
-  const clubs = [...new Set(events.map((event) => event.club))];
+  const clubs = [
+    "All",
+    ...new Set(events.map((event) => event.club)),
+  ];
 
-  let filteredEvents = events.filter((event) => {
-    const searchText = search.toLowerCase();
+  const filteredEvents = events
+    .filter((event) => {
+      const matchesSearch =
+        event.title.toLowerCase().includes(search.toLowerCase()) ||
+        event.venue.toLowerCase().includes(search.toLowerCase()) ||
+        event.club.toLowerCase().includes(search.toLowerCase());
 
-    const matchesSearch =
-      event.title.toLowerCase().includes(searchText) ||
-      event.club.toLowerCase().includes(searchText) ||
-      event.venue.toLowerCase().includes(searchText);
+      const matchesCategory =
+        category === "All" || event.category === category;
 
-    const matchesCategory =
-      category === "All" || event.category === category;
+      const matchesDate =
+        selectedDate === "" || event.date === selectedDate;
 
-    const matchesDate =
-      selectedDate === "" || event.date === selectedDate;
+      const matchesClub =
+        club === "All" || event.club === club;
 
-    const matchesClub =
-      club === "All" || event.club === club;
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesDate &&
+        matchesClub
+      );
+    })
+    .sort((a, b) => {
+      if (sortBy === "popular") {
+        return b.registered - a.registered;
+      }
 
-    return (
-      matchesSearch &&
-      matchesCategory &&
-      matchesDate &&
-      matchesClub
-    );
-  });
-
-  filteredEvents = [...filteredEvents].sort((a, b) => {
-    if (sortBy === "upcoming") {
       return new Date(a.date) - new Date(b.date);
-    }
+    });
 
-    if (sortBy === "popular") {
-      return b.registered - a.registered;
-    }
-
-    return 0;
-  });
-
-  const clearFilters = () => {
+  function clearFilters() {
     setSearch("");
     setCategory("All");
     setSelectedDate("");
     setClub("All");
     setSortBy("upcoming");
-  };
+  }
 
   return (
-    <main className="min-h-screen bg-[#0B0F19] px-6 py-12 text-white">
-      <div className="mx-auto max-w-375">
+    <main className="min-h-screen bg-[#FFF9F2] text-[#38340E]">
 
-        {/* PAGE HEADING */}
-        <div className="mb-8">
-          <p className="font-bold text-[#FF8A3D]">
-            DISCOVER YOUR CAMPUS
+      {/* PAGE HEADER */}
+      <section className="border-b border-[#F3E8D8] bg-white px-6 py-16">
+        <div className="mx-auto max-w-7xl">
+
+          <p className="font-medium tracking-wide text-[#E56703]">
+            DISCOVER YOUR NEXT EXPERIENCE
           </p>
 
-          <h1 className="mt-2 text-4xl font-bold">
+          <h1 className="font-heading mt-2 text-4xl font-bold text-[#38340E] md:text-5xl">
             Explore Events
           </h1>
 
-          <p className="mt-3 text-[#94A3B8]">
-            Search and filter events by category, date, and club.
+          <p className="mt-4 max-w-2xl text-[#6D6131]">
+            Search, filter, and discover exciting events happening
+            across your campus.
           </p>
+
         </div>
+      </section>
 
-        {/* SEARCH BAR */}
-        <div className="mb-8">
-          <input
-            type="text"
-            placeholder="🔍  Search events, clubs, venues..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-2xl border border-[#293548] bg-[#131A2A] px-6 py-5 text-lg text-white outline-none placeholder:text-[#64748B] focus:border-[#FF8A3D]"
-          />
+
+      {/* SEARCH BAR */}
+      <section className="bg-white px-6 pb-10">
+        <div className="mx-auto max-w-7xl">
+
+          <div className="relative">
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-lg">
+              🔍
+            </span>
+
+            <input
+              type="text"
+              placeholder="Search events, venues, or clubs..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="w-full rounded-2xl border border-[#F3E8D8] bg-white py-4 pl-14 pr-5 text-[#38340E] outline-none transition placeholder:text-[#6D6131]/60 focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
+            />
+          </div>
+
         </div>
+      </section>
 
-        {/* FILTER + EVENTS */}
-        <div className="grid items-start gap-8 lg:grid-cols-[300px_minmax(0,1fr)]">
 
-          {/* LEFT FILTER SIDEBAR */}
-          <aside className="rounded-3xl border border-[#293548] bg-[#131A2A] p-6 lg:sticky lg:top-28">
+      {/* MAIN CONTENT */}
+      <section className="px-6 py-14">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[260px_1fr]">
 
-            <h2 className="text-2xl font-bold text-[#FF8A3D]">
-              ⚙ Filters
-            </h2>
+          {/* ================= FILTER SIDEBAR ================= */}
+          <aside className="h-fit rounded-2xl border border-[#F3E8D8] bg-white p-6 shadow-sm lg:sticky lg:top-28">
 
-            {/* SORT */}
-            <div className="mt-8">
-              <label className="font-bold text-[#CBD5E1]">
-                SORT BY
+            <div className="flex items-center justify-between">
+              <h2 className="font-heading text-xl font-semibold text-[#38340E]">
+                Filters
+              </h2>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="text-sm font-medium text-[#E56703] transition hover:text-[#FFA13D]"
+              >
+                Clear
+              </button>
+            </div>
+
+
+            {/* CATEGORY FILTER */}
+            <div className="mt-7">
+              <label className="font-heading text-sm font-semibold text-[#38340E]">
+                Category
               </label>
 
               <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="mt-3 w-full rounded-xl border border-[#293548] bg-[#0B0F19] p-4 text-white outline-none focus:border-[#FF8A3D]"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                className="mt-3 w-full rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm text-[#38340E] outline-none transition focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
               >
-                <option value="upcoming">Upcoming First</option>
-                <option value="popular">Most Popular</option>
+                {categories.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
               </select>
             </div>
 
-            {/* CATEGORY */}
-            <div className="mt-8">
-              <p className="font-bold text-[#CBD5E1]">
-                CATEGORY
-              </p>
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                {categories.map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => setCategory(item)}
-                    className={
-                      category === item
-                        ? "rounded-lg bg-[#FF8A3D] px-3 py-2 text-sm font-semibold text-white"
-                        : "rounded-lg border border-[#293548] bg-[#0B0F19] px-3 py-2 text-sm text-[#CBD5E1] hover:border-[#FF8A3D] hover:text-[#FF8A3D]"
-                    }
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* DATE */}
-            <div className="mt-8">
-              <label className="font-bold text-[#CBD5E1]">
-                EVENT DATE
+            {/* DATE FILTER */}
+            <div className="mt-6">
+              <label className="font-heading text-sm font-semibold text-[#38340E]">
+                Date
               </label>
 
               <input
                 type="date"
                 value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="mt-3 w-full rounded-xl border border-[#293548] bg-[#0B0F19] p-4 text-white outline-none focus:border-[#FF8A3D]"
+                onChange={(event) =>
+                  setSelectedDate(event.target.value)
+                }
+                className="mt-3 w-full rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm text-[#38340E] outline-none transition focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
               />
             </div>
 
-            {/* CLUB */}
-            <div className="mt-8">
-              <label className="font-bold text-[#CBD5E1]">
-                CLUB / ORGANIZER
+
+            {/* CLUB FILTER */}
+            <div className="mt-6">
+              <label className="font-heading text-sm font-semibold text-[#38340E]">
+                Organizer / Club
               </label>
 
               <select
                 value={club}
-                onChange={(e) => setClub(e.target.value)}
-                className="mt-3 w-full rounded-xl border border-[#293548] bg-[#0B0F19] p-4 text-white outline-none focus:border-[#FF8A3D]"
+                onChange={(event) => setClub(event.target.value)}
+                className="mt-3 w-full rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm text-[#38340E] outline-none transition focus:border-[#FFA13D] focus:ring-4 focus:ring-[#FFA13D]/10"
               >
-                <option value="All">All Clubs</option>
-
                 {clubs.map((item) => (
                   <option key={item} value={item}>
                     {item}
@@ -182,38 +182,65 @@ function ExploreEvents() {
               </select>
             </div>
 
-            {/* RESULTS COUNT */}
-            <div className="mt-8 border-t border-[#293548] pt-6 text-center">
-              <span className="text-xl font-bold text-[#FF8A3D]">
-                {filteredEvents.length}
-              </span>
 
-              <span className="ml-2 text-[#94A3B8]">
-                events found
-              </span>
+            {/* ACTIVE FILTER INFORMATION */}
+            <div className="mt-7 rounded-xl bg-[#FFF9F2] p-4">
+              <p className="text-sm leading-6 text-[#6D6131]">
+                Showing{" "}
+                <span className="font-semibold text-[#E56703]">
+                  {filteredEvents.length}
+                </span>{" "}
+                matching events
+              </p>
             </div>
 
-            {/* CLEAR BUTTON */}
-            <button
-              onClick={clearFilters}
-              className="mt-6 w-full rounded-xl border border-[#FF8A3D] py-3 font-bold text-[#FF8A3D] transition hover:bg-[#FF8A3D] hover:text-white"
-            >
-              Clear Filters
-            </button>
           </aside>
 
-          {/* RIGHT SIDE EVENTS */}
-          <section className="min-w-0">
-            <p className="mb-5 text-[#94A3B8]">
-              Showing{" "}
-              <span className="font-bold text-[#FF8A3D]">
-                {filteredEvents.length}
-              </span>{" "}
-              events
-            </p>
 
+          {/* ================= EVENTS AREA ================= */}
+          <div>
+
+            {/* RESULT COUNT + SORT */}
+            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+              <div>
+                <h2 className="font-heading text-2xl font-bold text-[#38340E]">
+                  Available Events
+                </h2>
+
+                <p className="mt-1 text-sm text-[#6D6131]">
+                  {filteredEvents.length} events found
+                </p>
+              </div>
+
+
+              {/* SORT */}
+              <div className="flex items-center gap-3">
+                <label className="text-sm text-[#6D6131]">
+                  Sort by
+                </label>
+
+                <select
+                  value={sortBy}
+                  onChange={(event) => setSortBy(event.target.value)}
+                  className="rounded-xl border border-[#F3E8D8] bg-white px-4 py-3 text-sm font-medium text-[#38340E] outline-none transition focus:border-[#FFA13D]"
+                >
+                  <option value="upcoming">
+                    Upcoming First
+                  </option>
+
+                  <option value="popular">
+                    Most Popular
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+
+            {/* EVENT CARDS */}
             {filteredEvents.length > 0 ? (
-              <div className="grid gap-6 xl:grid-cols-2">
+              <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
                 {filteredEvents.map((event) => (
                   <EventCard
                     key={event.id}
@@ -222,27 +249,39 @@ function ExploreEvents() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-3xl border border-[#293548] bg-[#131A2A] p-16 text-center">
-                <h2 className="text-2xl font-bold">
-                  No events found
-                </h2>
 
-                <p className="mt-3 text-[#94A3B8]">
-                  Try changing your search or filters.
+              /* NO EVENTS FOUND */
+              <div className="rounded-2xl border border-[#F3E8D8] bg-white px-6 py-20 text-center shadow-sm">
+
+                <div className="text-5xl">
+                  🔍
+                </div>
+
+                <h3 className="font-heading mt-5 text-2xl font-semibold text-[#38340E]">
+                  No events found
+                </h3>
+
+                <p className="mx-auto mt-3 max-w-md text-[#6D6131]">
+                  Try changing your search or removing some filters
+                  to discover more campus events.
                 </p>
 
                 <button
+                  type="button"
                   onClick={clearFilters}
-                  className="mt-6 rounded-xl bg-[#FF8A3D] px-6 py-3 font-bold text-white hover:bg-[#FFA15F]"
+                  className="mt-7 rounded-xl bg-[#FFA13D] px-6 py-3 font-semibold text-white transition hover:bg-[#E56703]"
                 >
                   Clear All Filters
                 </button>
+
               </div>
             )}
-          </section>
+
+          </div>
 
         </div>
-      </div>
+      </section>
+
     </main>
   );
 }

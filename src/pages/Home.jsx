@@ -1,29 +1,31 @@
 import { Link } from "react-router-dom";
 import EventCard from "../components/EventCard";
+import EventCarousel from "../components/EventCarousel";
 import events from "../data/events";
 
 function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#0B0F19] text-white">
+    <main className="min-h-screen overflow-hidden bg-white text-[#38340E]">
 
-      {/* HOME HERO SECTION */}
-      <section className="relative">
-        <div className="absolute left-0 top-0 h-112.5 w-112.5 rounded-full bg-[#FF8A3D]/10 blur-[150px]" />
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative bg-white">
+        {/* SOFT ORANGE GLOW */}
+        <div className="absolute left-0 top-0 h-[450px] w-[450px] rounded-full bg-[#FFA13D]/15 blur-[150px]" />
 
-        <div className="relative mx-auto min-h-162.5 max-w-7xl px-6 py-20">
+        <div className="relative mx-auto min-h-[620px] max-w-7xl px-6 py-20">
 
           {/* BADGE */}
-          <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-[#FF8A3D]/40 bg-[#FF8A3D]/10 px-5 py-3 font-bold tracking-wide text-[#FFA15F]">
+          <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-[#FFA13D]/40 bg-[#FFA13D]/10 px-5 py-3 font-semibold tracking-wide text-[#E56703]">
             <span>★</span>
             CAMPUS&apos;S PREMIER EVENT CENTER
           </div>
 
           {/* HERO CONTENT */}
           <div className="max-w-4xl">
-            <h1 className="text-5xl font-extrabold leading-[1.15] tracking-tight md:text-6xl">
+            <h1 className="font-heading text-5xl font-bold leading-[1.15] tracking-tight md:text-6xl">
               Your Campus.
 
-              <span className="block text-[#FF8A3D]">
+              <span className="block text-[#FFA13D]">
                 Your Events.
               </span>
 
@@ -32,59 +34,73 @@ function Home() {
               </span>
             </h1>
 
-       <p className="mt-7 max-w-2xl text-lg leading-8 text-[#94A3B8]">
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#6D6131]">
               Discover the best events happening on your campus,
               connect with your community, and create unforgettable
               memories.
             </p>
 
+            {/* HERO BUTTONS */}
             <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 to="/events"
-                className="rounded-xl bg-[#FF8A3D] px-7 py-3.5 font-bold text-white shadow-lg shadow-[#FF8A3D]/20 hover:bg-[#FFA15F]"
+                className="rounded-xl bg-[#FFA13D] px-7 py-3.5 font-semibold text-white shadow-lg shadow-[#FFA13D]/20 transition hover:bg-[#E56703]"
               >
                 Explore Events →
               </Link>
 
-          <Link
+              <Link
                 to="/dashboard"
-                className="rounded-xl border border-[#293548] bg-[#131A2A] px-7 py-3.5 font-bold text-white hover:border-[#FF8A3D] hover:text-[#FF8A3D]"
+                className="rounded-xl border border-[#F3E8D8] bg-white px-7 py-3.5 font-semibold text-[#38340E] shadow-sm transition hover:border-[#FFA13D] hover:text-[#E56703]"
               >
                 Host an Event
-          </Link>
-          </div>
+              </Link>
+            </div>
           </div>
         </div>
-           </section>
+      </section>
 
-      {/* FEATURED EVENTS SECTION */}
-      <section className="border-t border-[#293548] bg-[#0B0F19] px-6 py-20">
+
+      {/* ================= CAROUSEL SECTION ================= */}
+      <EventCarousel />
+
+
+      {/* ================= FEATURED EVENTS ================= */}
+      <section className="border-t border-[#F3E8D8] bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
 
+          {/* SECTION HEADING */}
           <div className="mb-10">
-            <p className="font-semibold text-[#FF8A3D]">
+            <p className="font-medium text-[#E56703]">
               DON&apos;T MISS OUT
             </p>
 
-            <h2 className="mt-2 text-4xl font-bold text-white">
+            <h2 className="font-heading mt-2 text-4xl font-bold text-[#38340E]">
               Featured Events
             </h2>
 
-            <p className="mt-3 text-[#94A3B8]">
+            <p className="mt-3 text-[#6D6131]">
               Discover exciting events happening across your campus.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events.slice(0, 3).map((event) => (
-              <EventCard key={event.id} event={event} />
+          {/* SMALL EVENT CARDS */}
+          <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {events.slice(0, 4).map((event) => (
+              <div
+                key={event.id}
+                className="w-full max-w-72"
+              >
+                <EventCard event={event} />
+              </div>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          {/* VIEW ALL BUTTON */}
+          <div className="mt-12 text-center">
             <Link
               to="/events"
-              className="inline-block rounded-xl border border-[#FF8A3D] px-7 py-3 font-bold text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white"
+              className="inline-block rounded-xl border border-[#FFA13D] px-7 py-3 font-semibold text-[#E56703] transition hover:bg-[#FFA13D] hover:text-white"
             >
               View All Events →
             </Link>
@@ -92,73 +108,108 @@ function Home() {
 
         </div>
       </section>
-      {/* EXPLORE BY CATEGORY SECTION */}
-<section className="border-t border-[#293548] bg-[#0E1420] px-6 py-20">
-     <div className="mx-auto max-w-7xl">
 
-  <div className="mb-10 text-center">
-      <p className="font-semibold text-[#FF8A3D]">
-        FIND YOUR INTEREST
-      </p>
 
-      <h2 className="mt-2 text-4xl font-bold text-white">
-        Explore by Category
-      </h2>
+      {/* ================= EXPLORE BY CATEGORY ================= */}
+      <section className="border-t border-[#F3E8D8] bg-[#FFF9F2] px-6 py-20">
+        <div className="mx-auto max-w-7xl">
 
-      <p className="mt-3 text-[#94A3B8]">
-        Find events that match your interests.
-      </p>
-    </div>
+          {/* SECTION HEADING */}
+          <div className="mb-10 text-center">
+            <p className="font-medium text-[#E56703]">
+              FIND YOUR INTEREST
+            </p>
 
-    <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <h2 className="font-heading mt-2 text-4xl font-bold text-[#38340E]">
+              Explore by Category
+            </h2>
 
-      <Link
-        to="/events"
-        className="rounded-2xl border border-[#293548] bg-[#131A2A] p-7 text-center transition hover:-translate-y-1 hover:border-[#FF8A3D]"
-      >
-        <div className="text-4xl">💻</div>
-        <h3 className="mt-4 text-xl font-bold">Technology</h3>
-        <p className="mt-2 text-sm text-[#94A3B8]">
-          Hackathons and tech events
-        </p>
-      </Link>
+            <p className="mt-3 text-[#6D6131]">
+              Find events that match your interests.
+            </p>
+          </div>
 
-      <Link
-        to="/events"
-        className="rounded-2xl border border-[#293548] bg-[#131A2A] p-7 text-center transition hover:-translate-y-1 hover:border-[#FF8A3D]"
-      >
-        <div className="text-4xl">🎵</div>
-        <h3 className="mt-4 text-xl font-bold">Music</h3>
-        <p className="mt-2 text-sm text-[#94A3B8]">
-          Concerts and music festivals
-        </p>
-      </Link>
+          {/* CATEGORY CARDS */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
-      <Link
-        to="/events"
-        className="rounded-2xl border border-[#293548] bg-[#131A2A] p-7 text-center transition hover:-translate-y-1 hover:border-[#FF8A3D]"
-      >
-        <div className="text-4xl">🏆</div>
-        <h3 className="mt-4 text-xl font-bold">Sports</h3>
-        <p className="mt-2 text-sm text-[#94A3B8]">
-          Matches and sports trials
-        </p>
-      </Link>
+            {/* TECHNOLOGY */}
+            <Link
+              to="/events"
+              className="rounded-2xl border border-[#F3E8D8] bg-white p-7 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFA13D] hover:shadow-lg"
+            >
+              <div className="text-4xl">
+                💻
+              </div>
 
-      <Link
-        to="/events"
-        className="rounded-2xl border border-[#293548] bg-[#131A2A] p-7 text-center transition hover:-translate-y-1 hover:border-[#FF8A3D]"
-      >
-        <div className="text-4xl">🎨</div>
-        <h3 className="mt-4 text-xl font-bold">Arts</h3>
-        <p className="mt-2 text-sm text-[#94A3B8]">
-          Creative and cultural events
-        </p>
-      </Link>
+              <h3 className="font-heading mt-4 text-xl font-semibold text-[#38340E]">
+                Technology
+              </h3>
 
-    </div>
-  </div>
-</section>
+              <p className="mt-2 text-sm text-[#6D6131]">
+                Hackathons and tech events
+              </p>
+            </Link>
+
+
+            {/* MUSIC */}
+            <Link
+              to="/events"
+              className="rounded-2xl border border-[#F3E8D8] bg-white p-7 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFA13D] hover:shadow-lg"
+            >
+              <div className="text-4xl">
+                🎵
+              </div>
+
+              <h3 className="font-heading mt-4 text-xl font-semibold text-[#38340E]">
+                Music
+              </h3>
+
+              <p className="mt-2 text-sm text-[#6D6131]">
+                Concerts and music festivals
+              </p>
+            </Link>
+
+
+            {/* SPORTS */}
+            <Link
+              to="/events"
+              className="rounded-2xl border border-[#F3E8D8] bg-white p-7 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFA13D] hover:shadow-lg"
+            >
+              <div className="text-4xl">
+                🏆
+              </div>
+
+              <h3 className="font-heading mt-4 text-xl font-semibold text-[#38340E]">
+                Sports
+              </h3>
+
+              <p className="mt-2 text-sm text-[#6D6131]">
+                Matches and sports trials
+              </p>
+            </Link>
+
+
+            {/* ARTS */}
+            <Link
+              to="/events"
+              className="rounded-2xl border border-[#F3E8D8] bg-white p-7 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#FFA13D] hover:shadow-lg"
+            >
+              <div className="text-4xl">
+                🎨
+              </div>
+
+              <h3 className="font-heading mt-4 text-xl font-semibold text-[#38340E]">
+                Arts
+              </h3>
+
+              <p className="mt-2 text-sm text-[#6D6131]">
+                Creative and cultural events
+              </p>
+            </Link>
+
+          </div>
+        </div>
+      </section>
 
     </main>
   );
