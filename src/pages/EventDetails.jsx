@@ -152,7 +152,7 @@ function EventDetails() {
   return (
     <main className="min-h-screen bg-[#FFF9F2] text-[#38340E]">
 
-      {/* TOP EVENT SECTION */}
+      {/* Top section*/}
       <section className="border-b border-[#F3E8D8] bg-white px-6 py-14">
         <div className="mx-auto max-w-7xl">
 
@@ -210,14 +210,14 @@ function EventDetails() {
       </section>
 
 
-      {/* MAIN DETAILS SECTION */}
+      {/* main detail */}
       <section className="px-6 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_360px]">
 
-          {/* LEFT SIDE */}
+        
           <div className="space-y-8">
 
-            {/* ABOUT EVENT */}
+            
             <div className="rounded-2xl border border-[#F3E8D8] bg-white p-8 shadow-sm">
 
               <h2 className="font-heading text-2xl font-bold text-[#38340E]">
@@ -240,7 +240,7 @@ function EventDetails() {
   
 
 
-            {/* ================= SPEAKER INFORMATION ================= */}
+            {/* spaker info */}
             {event.speaker && (
               <div className="rounded-2xl border border-[#F3E8D8] bg-white p-8 shadow-sm">
 
@@ -254,14 +254,14 @@ function EventDetails() {
 
                 <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center">
 
-                  {/* SPEAKER IMAGE */}
-                  <img
+                  {/* Image */}
+                 <img
                     src={event.speaker.image}
                     alt={event.speaker.name}
                     className="h-28 w-28 shrink-0 rounded-2xl object-cover"
                   />
 
-                  {/* SPEAKER DETAILS */}
+                  
                   <div>
                     <h3 className="font-heading text-xl font-bold text-[#38340E]">
                       {event.speaker.name}
@@ -285,7 +285,7 @@ function EventDetails() {
             )}
 
 
-            {/* EVENT INFORMATION */}
+            {/* Event info */}
             <div className="rounded-2xl border border-[#F3E8D8] bg-white p-8 shadow-sm">
 
               <h2 className="font-heading text-2xl font-bold text-[#38340E]">
@@ -340,7 +340,7 @@ function EventDetails() {
           </div>
 
 
-          {/* RIGHT SIDE REGISTRATION CARD */}
+          {/* right registration*/}
           <aside>
             <div className="sticky top-28 rounded-2xl border border-[#F3E8D8] bg-white p-7 shadow-sm">
 
@@ -362,7 +362,7 @@ function EventDetails() {
 
               </div>
 
-              {/* PROGRESS BAR */}
+              {/* ptogress bar */}
               <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-[#F3E8D8]">
                 <div
                   className="h-full rounded-full bg-[#FFA13D]"
@@ -399,15 +399,15 @@ function EventDetails() {
       </section>
 
 
-      {/* REGISTRATION MODAL */}
-     {/* REGISTRATION MODAL */}
+      
+     {/* Regi modal*/}
 <Modal
   isOpen={isModalOpen}
   onClose={handleCloseModal}
 >
   {showTicket ? (
 
-    /* QR TICKET SCREEN */
+    
     <div>
       <QRCodeTicket
         event={event}
@@ -433,7 +433,7 @@ function EventDetails() {
 
   ) : isRegistered ? (
 
-    /* SUCCESS SCREEN */
+    
     <div className="py-6 text-center">
 
       <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#FFA13D]/15 text-4xl font-bold text-[#E56703]">
@@ -508,7 +508,7 @@ function EventDetails() {
 
   ) : (
 
-    /* REGISTRATION FORM */
+  
     <div>
 
       <p className="font-medium text-[#E56703]">

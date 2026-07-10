@@ -23,45 +23,24 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Route path="/" element={<Home />} />
 
-        <Route
-          path="/events"
-          element={<ExploreEvents />}
-        />
+        <Route path="/events" element={<ExploreEvents />} />
 
-        <Route
-          path="/events/:id"
-          element={<EventDetails />}
-        />
+        <Route path="/events/:id" element={<EventDetails />} />
 
-        <Route
-          path="/past-events"
-          element={<PastEvents />}
-        />
+        <Route path="/past-events" element={<PastEvents />} />
 
-        <Route
-          path="/tickets"
-          element={<Tickets />}
-        />
+        <Route path="/tickets" element={<Tickets />} />
 
         <Route
           path="/login"
           element={<Login />}
         />
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/organizer-login"
-          element={<OrganizerLogin />}
-        />
+        <Route path="/organizer-login" element={<OrganizerLogin />} />
 
         <Route
           path="/dashboard"

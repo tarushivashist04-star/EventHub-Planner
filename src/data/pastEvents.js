@@ -8,7 +8,7 @@ const pastEvents = [
     venue: "Innovation Lab",
     club: "Coding Club",
     image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80",
+      "/Images/TachFest.png",
     description:
       "A full-day technology festival featuring coding challenges, project exhibitions, and innovative student ideas.",
     highlight:
@@ -24,7 +24,7 @@ const pastEvents = [
     venue: "Main Auditorium",
     club: "Cultural Club",
     image:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+      "/Images/Fest.jpeg",
     description:
       "An exciting celebration of dance, music, theatre, and cultural performances by students.",
     highlight:
@@ -40,7 +40,7 @@ const pastEvents = [
     venue: "College Sports Ground",
     club: "Sports Club",
     image:
-      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80",
+      "/Images/SportsMeet.jpeg",
     description:
       "A competitive sports event featuring athletics, football, basketball, and team challenges.",
     highlight:
@@ -56,7 +56,7 @@ const pastEvents = [
     venue: "Open Air Theatre",
     club: "Music Club",
     image:
-      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80",
+      "/Images/Bnads.jpg",
     description:
       "Student bands performed live and competed for the title of the best campus band.",
     highlight:
@@ -72,7 +72,7 @@ const pastEvents = [
     venue: "College Exhibition Hall",
     club: "Fine Arts Club",
     image:
-      "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=80",
+      "/Images/Art.jpeg",
     description:
       "A showcase of paintings, digital art, photography, and creative work made by students.",
     highlight:
@@ -88,7 +88,7 @@ const pastEvents = [
     venue: "Seminar Hall",
     club: "Entrepreneurship Cell",
     image:
-      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=80",
+      "/Images/Idea.jpeg",
     description:
       "Students presented startup ideas and received feedback from mentors and industry professionals.",
     highlight:

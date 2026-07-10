@@ -272,7 +272,7 @@ function Dashboard() {
             </p>
           </div>
 
-          {/* CREATE EVENT + LOGOUT */}
+          {/* Create Eent*/}
           <div className="flex flex-wrap gap-3">
 
             <button
@@ -296,7 +296,7 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* STATISTICS */}
+        {/* Stat */}
         <section className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
           <div className="rounded-2xl border border-[#F3E8D8] bg-white p-6 shadow-sm">
@@ -346,7 +346,7 @@ function Dashboard() {
 
         </section>
 
-        {/* CREATE / EDIT FORM */}
+        {/*form edit*/}
         {isFormOpen && (
           <section className="mt-12 rounded-2xl border border-[#F3E8D8] bg-white p-6 shadow-sm md:p-8">
 
@@ -400,7 +400,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* CATEGORY */}
+              {/* category*/}
               <div>
                 <label className="mb-2 block font-medium">
                   Category{" "}
@@ -462,7 +462,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* DATE */}
+              
               <div>
                 <label className="mb-2 block font-medium">
                   Event Date{" "}
@@ -479,7 +479,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* SEATS */}
+              {/* seat*/}
               <div>
                 <label className="mb-2 block font-medium">
                   Total Seats{" "}
@@ -498,7 +498,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* START TIME */}
+              {/* time */}
               <div>
                 <label className="mb-2 block font-medium">
                   Start Time{" "}
@@ -515,7 +515,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* END TIME */}
+              {/* END */}
               <div>
                 <label className="mb-2 block font-medium">
                   End Time{" "}
@@ -532,7 +532,7 @@ function Dashboard() {
                 />
               </div>
 
-              {/* IMAGE UPLOAD */}
+              {/* UPLOAD image*/}
               <div className="md:col-span-2">
                 <label className="mb-2 block font-medium">
                   Event Picture{" "}
@@ -636,7 +636,7 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* EVENT CARDS */}
+          {/* Event card */}
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
 
             {filteredEvents.map((event) => (

@@ -33,7 +33,7 @@ function EventCard({ event }) {
       {/* CARD CONTENT */}
       <div className="p-5">
 
-        {/* TITLE */}
+        
         <h3 className="font-heading min-h-14 text-lg font-semibold leading-7 text-[#38340E]">
           {event.title}
         </h3>

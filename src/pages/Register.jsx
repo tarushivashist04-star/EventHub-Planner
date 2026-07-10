@@ -133,7 +133,7 @@ function Register() {
           ← Go Back
         </Link>
 
-        {/* PAGE HEADING */}
+        {/* PAGE head */}
         <div className="mt-10">
           <p className="font-semibold text-[#E56703]">
             JOIN EVENTHUB
@@ -149,13 +149,13 @@ function Register() {
           </p>
         </div>
 
-        {/* REGISTRATION FORM */}
+        {/* Regist*/}
         <form
           onSubmit={handleSubmit}
           className="mt-12 space-y-8"
         >
 
-          {/* FULL NAME */}
+          
           <div>
             <label htmlFor="fullName" className={labelClass}>
               Full Name <span className="text-red-500">*</span>
@@ -173,7 +173,7 @@ function Register() {
             />
           </div>
 
-          {/* EMAIL */}
+          
           <div>
             <label htmlFor="email" className={labelClass}>
               College Email <span className="text-red-500">*</span>
@@ -191,7 +191,7 @@ function Register() {
             />
           </div>
 
-          {/* PHONE */}
+          
           <div>
             <label htmlFor="phone" className={labelClass}>
               Phone Number <span className="text-red-500">*</span>
@@ -214,7 +214,7 @@ function Register() {
             />
           </div>
 
-          {/* UNIVERSITY */}
+          
           <div>
             <label htmlFor="university" className={labelClass}>
               College / University Name{" "}
@@ -233,7 +233,7 @@ function Register() {
             />
           </div>
 
-          {/* COURSE AND YEAR */}
+        
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label htmlFor="course" className={labelClass}>
@@ -275,7 +275,7 @@ function Register() {
             </div>
           </div>
 
-          {/* DATE OF BIRTH */}
+        
           <div>
             <label htmlFor="dateOfBirth" className={labelClass}>
               Date of Birth <span className="text-red-500">*</span>
@@ -292,7 +292,7 @@ function Register() {
             />
           </div>
 
-          {/* GENDER */}
+          
           <div>
             <p className={labelClass}>
               Gender <span className="text-red-500">*</span>
@@ -338,7 +338,7 @@ function Register() {
             </div>
           </div>
 
-          {/* STUDENT ID */}
+          
           <div>
             <label htmlFor="studentId" className={labelClass}>
               Student ID <span className="text-red-500">*</span>
@@ -356,7 +356,7 @@ function Register() {
             />
           </div>
 
-          {/* PASSWORD */}
+        
           <div>
             <label htmlFor="password" className={labelClass}>
               Password <span className="text-red-500">*</span>
@@ -398,7 +398,7 @@ function Register() {
             </p>
           </div>
 
-          {/* CONFIRM PASSWORD */}
+        
           <div>
             <label htmlFor="confirmPassword" className={labelClass}>
               Confirm Password{" "}
@@ -441,7 +441,7 @@ function Register() {
             </div>
           </div>
 
-          {/* SUCCESS MESSAGE */}
+          
           {success && (
             <div className="rounded-2xl border border-[#FFA13D]/30 bg-[#FFA13D]/10 px-6 py-5">
               <div className="flex items-start gap-4">
@@ -463,14 +463,14 @@ function Register() {
             </div>
           )}
 
-          {/* ERROR MESSAGE */}
+          
           {error && (
             <p className="rounded-xl bg-red-50 px-5 py-4 text-sm text-red-600">
               {error}
             </p>
           )}
 
-          {/* CREATE ACCOUNT */}
+        
           <button
             type="submit"
             disabled={isCreating || success}
@@ -480,7 +480,7 @@ function Register() {
           </button>
         </form>
 
-        {/* LOGIN LINK */}
+        
         <p className="mt-8 text-center text-[#6D6131]">
           Already have an account?{" "}
           <Link

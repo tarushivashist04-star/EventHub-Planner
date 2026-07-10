@@ -68,7 +68,7 @@ function Tickets() {
           </p>
         </div>
 
-        {/* TICKET CARDS */}
+        {/* ticket CARDS */}
         <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
           {savedTickets.map((ticket) => (
             <article
