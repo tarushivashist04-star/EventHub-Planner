@@ -57,6 +57,7 @@ function Login() {
           email: loggedInUser.email,
         })
       );
+      window.dispatchEvent(new Event("student-login-change"));
 
       setSuccess(true);
 

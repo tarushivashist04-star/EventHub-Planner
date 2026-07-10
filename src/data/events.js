@@ -12,6 +12,14 @@ const events = [
       "/Images/Robort.webp",
     registered: 58,
     capacity: 60,
+
+    speaker: {
+    name: "Dr. Rahul Sharma",
+    role: "AI & Machine Learning Expert",
+    organization: "Tech Innovation Lab",
+    image: "/Images/Rahul Ai.jpeg",
+    bio: "An AI researcher and industry expert with experience in machine learning and emerging technologies.",
+  },
   },
   {
     id: 2,
@@ -26,6 +34,14 @@ const events = [
       "/Images/Fest.jpeg",
     registered: 120,
     capacity: 200,
+    // EVENT 2
+    speaker: {
+    name: "Ananya Sharma",
+    role: "Music Producer",
+    organization: "Music Club",
+    image: "/Images/Ananya.jpeg",
+     bio: "A musician and performer with experience in live shows, music production, and collaborative performances",
+    },
   },
   {
     id: 3,
@@ -40,6 +56,15 @@ const events = [
       "/Images/Camera.jpg",
     registered: 28,
     capacity: 40,
+     
+    // EVENT 3
+speaker: {
+  name: "Arjun Malhotra",
+  role: "Photographic Producer & Performer",
+  organization: "Photography Society",
+  image: "/Images/Arjun.jpeg",
+  bio: "An experienced photographer who helps students learn composition, lighting, camera techniques, and creative visual storytelling.",
+ },
   },
   {
     id: 4,
@@ -54,6 +79,15 @@ const events = [
       "/Images/Startup.jpeg",
     registered: 75,
     capacity: 100,
+    
+    // EVENT 4
+speaker: {
+  name: "Neha Kapoor",
+  role: "Entrepreneur & Startup Mentor",
+  organization: "Innovation and Entrepreneurship Cell",
+  image: "/Images/Neha.jpeg",
+  bio: "An entrepreneur and startup mentor who guides students in idea validation, business planning, pitching, and building early-stage ventures.",
+},
   },
   {
     id: 5,
@@ -68,6 +102,15 @@ const events = [
       "/Images/Sports.jpeg",
     registered: 140,
     capacity: 200,
+
+    // EVENT 5
+speaker: {
+  name: "Vikram Singh",
+  role: "Sports Coach",
+  organization: "University Sports Committee",
+  image: "/Images/Vikram.jpeg",
+  bio: "An experienced sports coach focused on teamwork, discipline, fitness, and helping students improve their competitive performance.",
+},
   },
   {
     id: 6,
@@ -82,6 +125,15 @@ const events = [
       "/Images/Design.jpeg",
     registered: 35,
     capacity: 50,
+
+    // EVENT 6
+speaker: {
+  name: "Priya Verma",
+  role: "Creative Artist",
+  organization: "Fine Arts Society",
+  image: "/Images/Priya.jpeg",
+  bio: "A creative artist who works across visual art and design and encourages students to explore new techniques and forms of expression.",
+},
   },
 
    {
@@ -97,6 +149,15 @@ const events = [
       "/Images/Dance.jpeg",
     registered: 55,
     capacity: 150,
+
+    // EVENT 7
+speaker: {
+  name: "Karan Khanna",
+  role: "Professional Dancer",
+  organization: "Creative Club",
+  image: "/Images/Karan.jpeg",
+  bio: "A Choregrapher and a professional Dance Artist have a 20+ years experience.",
+},
   },
 
    {
@@ -112,6 +173,15 @@ const events = [
       "/Images/Code.jpeg",
     registered: 20,
     capacity: 40,
+
+    // EVENT 8
+speaker: {
+  name: "Dr. Simran Kaur",
+  role: "Career and Leadership Mentor",
+  organization: "Student Development Centre",
+  image: "/Images/Simran.jpeg",
+  bio: "A student mentor who works with young professionals on communication, leadership, career planning, and personal development.",
+},
   },
 
    {
@@ -127,6 +197,15 @@ const events = [
       "/Images/Cricket.jpeg",
     registered: 50,
     capacity: 15,
+
+    // EVENT 9
+speaker: {
+  name: "Aarav Mehta",
+  role: "Disctrict Team Selector",
+  organization: "Sports Club",
+  image: "/Images/Aarav.jpeg",
+  bio: "BCCI Selector and Remain Caption for 5 years.",
+},
   },
 ];
 

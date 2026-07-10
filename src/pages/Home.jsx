@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EventCard from "../components/EventCard";
-import EventCarousel from "../components/EventCarousel";
 import events from "../data/events";
 import { fetchEventData } from "../api/eventApi";
 
@@ -9,6 +8,9 @@ function Home() {
   const [apiEvents, setApiEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState("");
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+
+  const heroEvents = events.slice(0, 5);
 
   useEffect(() => {
     async function loadEventData() {
@@ -28,9 +30,21 @@ function Home() {
         setIsLoading(false);
       }
     }
+    
 
     loadEventData();
   }, []);
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentHeroSlide((previous) =>
+      previous === heroEvents.length - 1
+        ? 0
+        : previous + 1
+    );
+  }, 3000);
+
+  return () => clearInterval(interval);
+}, [heroEvents.length]);
 
   const campusUpdates = [
     {
@@ -75,56 +89,126 @@ function Home() {
     <main className="min-h-screen overflow-hidden bg-white text-[#38340E]">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative bg-white">
-        <div className="absolute left-0 top-0 h-[450px] w-[450px] rounded-full bg-[#FFA13D]/15 blur-[150px]" />
+      {/* ================= HERO SECTION ================= */}
+<section className="relative overflow-hidden bg-white">
+  {/* SOFT ORANGE GLOW */}
+  <div className="pointer-events-none absolute left-0 top-0 h-[450px] w-[450px] rounded-full bg-[#FFA13D]/15 blur-[150px]" />
 
-        <div className="relative mx-auto min-h-[620px] max-w-7xl px-6 py-20">
+  <div className="relative mx-auto min-h-[620px] max-w-7xl px-6 py-16 md:py-20">
 
-          <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-[#FFA13D]/40 bg-[#FFA13D]/10 px-5 py-3 font-semibold tracking-wide text-[#E56703]">
-            <span>★</span>
-            CAMPUS&apos;S PREMIER EVENT CENTER
-          </div>
+    {/* TWO COLUMN LAYOUT */}
+    <div className="grid items-start gap-12 lg:grid-cols-[1fr_420px] lg:gap-16">
 
-          <div className="max-w-4xl">
-            <h1 className="font-heading text-5xl font-bold leading-[1.15] tracking-tight md:text-6xl">
-              Your Campus.
+      {/* ================= LEFT SIDE ================= */}
+      <div>
+        {/* BADGE */}
+        <div className="inline-flex items-center gap-3 rounded-full border border-[#FFA13D]/40 bg-[#FFA13D]/10 px-5 py-3 font-semibold tracking-wide text-[#E56703]">
+          <span>★</span>
+          CAMPUS&apos;S PREMIER EVENT CENTER
+        </div>
 
-              <span className="block text-[#FFA13D]">
-                Your Events.
-              </span>
+        {/* HEADING */}
+        <h1 className="font-heading mt-14 text-5xl font-bold leading-[1.15] tracking-tight md:text-6xl">
+          Your Campus.
 
-              <span className="block">
-                Your Experience.
-              </span>
-            </h1>
+          <span className="block text-[#FFA13D]">
+            Your Events.
+          </span>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#6D6131]">
-              Discover the best events happening on your campus,
-              connect with your community, and create unforgettable
-              memories.
-            </p>
+          <span className="block">
+            Your Experience.
+          </span>
+        </h1>
 
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                to="/events"
-                className="rounded-xl bg-[#FFA13D] px-7 py-3.5 font-semibold text-white shadow-lg shadow-[#FFA13D]/20 transition hover:bg-[#E56703]"
-              >
-                Explore Events →
-              </Link>
+        {/* DESCRIPTION */}
+        <p className="mt-7 max-w-2xl text-lg leading-8 text-[#6D6131]">
+          Discover the best events happening on your campus,
+          connect with your community, and create unforgettable
+          memories.
+        </p>
 
-              <Link
-                to="/dashboard"
-                className="rounded-xl border border-[#F3E8D8] bg-white px-7 py-3.5 font-semibold text-[#38340E] shadow-sm transition hover:border-[#FFA13D] hover:text-[#E56703]"
-              >
-                Host an Event
-              </Link>
+        {/* BUTTONS */}
+        <div className="mt-9 flex flex-wrap gap-4">
+          <Link
+            to="/events"
+            className="rounded-xl bg-[#FFA13D] px-7 py-3.5 font-semibold text-white shadow-lg shadow-[#FFA13D]/20 transition hover:bg-[#E56703]"
+          >
+            Explore Events →
+          </Link>
+
+          <Link
+            to="/organizer-login"
+            className="rounded-xl border border-[#F3E8D8] bg-white px-7 py-3.5 font-semibold text-[#38340E] shadow-sm transition hover:border-[#FFA13D] hover:text-[#E56703]"
+          >
+            Host an Event
+          </Link>
+        </div>
+      </div>
+
+
+      {/* ================= RIGHT CAROUSEL ================= */}
+      <div className="mx-auto w-full max-w-[420px] lg:pt-0">
+
+        {/* CARD */}
+        <div className="overflow-hidden rounded-3xl border border-[#F3E8D8] bg-white p-3 shadow-2xl shadow-[#38340E]/10">
+
+          {/* IMAGE AREA */}
+          <div className="relative h-[400px] overflow-hidden rounded-2xl">
+
+            <img
+              src={heroEvents[currentHeroSlide].image}
+              alt={heroEvents[currentHeroSlide].title}
+              className="h-full w-full object-cover"
+            />
+
+            {/* DARK GRADIENT */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+            {/* CATEGORY */}
+            <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-[#E56703] backdrop-blur-sm">
+              {heroEvents[currentHeroSlide].category}
+            </span>
+
+            {/* EVENT DETAILS */}
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p className="text-sm font-medium text-white/80">
+                Featured Event
+              </p>
+
+              <h2 className="font-heading mt-2 text-2xl font-bold">
+                {heroEvents[currentHeroSlide].title}
+              </h2>
+
+              <p className="mt-3 text-sm text-white/85">
+                📍 {heroEvents[currentHeroSlide].venue}
+              </p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ================= CAROUSEL SECTION ================= */}
-      <EventCarousel />
+        {/* CAROUSEL DOTS */}
+        <div className="mt-5 flex justify-center gap-2">
+          {heroEvents.map((event, index) => (
+            <button
+              key={event.id}
+              type="button"
+              onClick={() => setCurrentHeroSlide(index)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                currentHeroSlide === index
+                  ? "w-8 bg-[#FFA13D]"
+                  : "w-2.5 bg-[#F3E8D8]"
+              }`}
+              aria-label={`Show ${event.title}`}
+            />
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+      
+
 
       {/* ================= FEATURED EVENTS ================= */}
       <section className="border-t border-[#F3E8D8] bg-white px-6 py-20">

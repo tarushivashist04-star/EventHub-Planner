@@ -237,6 +237,52 @@ function EventDetails() {
               </p>
 
             </div>
+  
+
+
+            {/* ================= SPEAKER INFORMATION ================= */}
+            {event.speaker && (
+              <div className="rounded-2xl border border-[#F3E8D8] bg-white p-8 shadow-sm">
+
+                <p className="font-medium text-[#E56703]">
+                  MEET THE SPEAKER
+                </p>
+
+                <h2 className="font-heading mt-2 text-2xl font-bold text-[#38340E]">
+                  Speaker Information
+                </h2>
+
+                <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center">
+
+                  {/* SPEAKER IMAGE */}
+                  <img
+                    src={event.speaker.image}
+                    alt={event.speaker.name}
+                    className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+                  />
+
+                  {/* SPEAKER DETAILS */}
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-[#38340E]">
+                      {event.speaker.name}
+                    </h3>
+
+                    <p className="mt-1 font-medium text-[#E56703]">
+                      {event.speaker.role}
+                    </p>
+
+                    <p className="mt-1 text-sm text-[#6D6131]">
+                      {event.speaker.organization}
+                    </p>
+
+                    <p className="mt-4 leading-7 text-[#6D6131]">
+                      {event.speaker.bio}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            )}
 
 
             {/* EVENT INFORMATION */}
