@@ -1,4 +1,5 @@
 import { useState } from "react";
+//useParams read vaue from url
 import { Link, useParams } from "react-router-dom";
 
 import Modal from "../components/Modal.jsx";
@@ -6,9 +7,11 @@ import QRCodeTicket from "../components/QRCodeTicket.jsx";
 import events from "../data/events";
 
 function EventDetails() {
+  //eg 2 event detail
   const { id } = useParams();
-
+//when register now tapmodal open
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //
   const [isRegistered, setIsRegistered] = useState(false);
   const [showTicket, setShowTicket] = useState(false);
 
@@ -18,17 +21,22 @@ function EventDetails() {
     studentId: "",
     phone: "",
   });
+  //correct event find by id
+  //useparams return string use number to convert 
 
   const event = events.find(
     (item) => item.id === Number(id)
   );
-
+ //after user tyoe fun run like t ta...
   function handleChange(e) {
+    //place full tarushi in target
   const { name, value } = e.target;
-
+//check ph no is there or not
   if (name === "phone") {
+    //replace remove @/ un usual things only 10 digits
     const onlyNumbers = value.replace(/\D/g, "").slice(0, 10);
-
+  
+    //update only the ph 
     setFormData((previousData) => ({
       ...previousData,
       phone: onlyNumbers,
@@ -42,10 +50,11 @@ function EventDetails() {
     [name]: value,
   }));
 }
-
+//when confirm submit
   function handleSubmit(e) {
+    //html refresh pabge
   e.preventDefault();
-
+//tri remove space
   const fullName = formData.fullName.trim();
   const email = formData.email.trim();
   const studentId = formData.studentId.trim();
@@ -97,7 +106,7 @@ function EventDetails() {
 
     registeredAt: new Date().toISOString(),
   };
-
+//to see previous and latest ticket
   localStorage.setItem(
     "eventhub-my-tickets",
     JSON.stringify([newTicket, ...savedTickets])
@@ -110,7 +119,7 @@ function EventDetails() {
   setIsModalOpen(false);
   setIsRegistered(false);
   setShowTicket(false);
-
+//for agin empty after registration
   setFormData({
     fullName: "",
     email: "",
@@ -118,6 +127,7 @@ function EventDetails() {
     phone: "",
   });
 }
+//like not event present
   if (!event) {
     return (
       <main className="min-h-screen bg-[#FFF9F2] px-6 py-20 text-center">
@@ -402,6 +412,7 @@ function EventDetails() {
       
      {/* Regi modal*/}
 <Modal
+//after clicking register now
   isOpen={isModalOpen}
   onClose={handleCloseModal}
 >

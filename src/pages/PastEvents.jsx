@@ -10,9 +10,11 @@ import pastEvents from "../data/pastEvents";
 function PastEvents() {
   const [selectedCategory, setSelectedCategory] =
     useState("All");
-
+//categories used to cret category button
+//to view all events
   const categories = [
     "All",
+    //.. remove duplicacy
     ...new Set(
       pastEvents.map((event) => event.category)
     ),

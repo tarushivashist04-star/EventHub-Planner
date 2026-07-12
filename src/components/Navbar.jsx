@@ -6,21 +6,26 @@ import {
 } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { signOut } from "firebase/auth";
+//for firbase work
 import { auth } from "../firebase";
 
+//func fornavbar
 function Navbar() {
+  //navigate -ex login
   const navigate = useNavigate();
-
+  //false menu close
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [currentUser, setCurrentUser] = useState(() => {
     const savedUser = localStorage.getItem(
       "eventhub-current-user"
     );
-
+    
+    //local storage only string(convert string to object json)
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  //Used latest login
   useEffect(() => {
     function updateCurrentUser() {
       const savedUser = localStorage.getItem(
@@ -31,12 +36,16 @@ function Navbar() {
         savedUser ? JSON.parse(savedUser) : null
       );
     }
-
+     
+    //This is for refresh the detail of student refresh without loading
+    //wind browser obj (scroll, scr size) 
     window.addEventListener(
       "student-login-change",
       updateCurrentUser
     );
-
+    
+    //for cleanup remove beacuse ofduplaicy
+    //memory leak
     return () => {
       window.removeEventListener(
         "student-login-change",
@@ -44,12 +53,16 @@ function Navbar() {
       );
     };
   }, []);
-
+    
+  // NavBar class for active and non active link diff style
+  //Arrow function used object destructuring for acess active
+  //active return activestyle or inactivestyle 
   const navLinkClass = ({ isActive }) =>
     isActive
       ? "rounded-xl border border-[#FFA13D]/40 bg-[#FFA13D]/10 px-5 py-3 font-medium text-[#E56703]"
       : "px-5 py-3 font-medium text-[#38340E] transition hover:text-[#E56703]";
 
+      //check active link as navlinkclass mobile
   const mobileNavLinkClass = ({ isActive }) =>
     isActive
       ? "block rounded-xl bg-[#FFA13D]/10 px-4 py-3 font-medium text-[#E56703]"
@@ -58,8 +71,11 @@ function Navbar() {
   function closeMenu() {
     setIsMenuOpen(false);
   }
-
+  
+  //async function for logout bc firebase return a promise
   async function handleLogout() {
+
+    //try for handle 
     try {
       await signOut(auth);
 
@@ -67,9 +83,11 @@ function Navbar() {
         "eventhub-current-user"
       );
 
+      //update state swicth from logout /ticket - login/signup
       setCurrentUser(null);
       setIsMenuOpen(false);
-
+      
+      //app navigate to login until logout
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
@@ -83,17 +101,19 @@ function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
 
         {/* LOGO */}
+        {/*link for client side things without realoading*/}
         <Link
           to="/"
           onClick={closeMenu}
           className="font-heading text-2xl font-bold text-[#38340E]"
         >
           Event
+          {/*to change hub only*/}
           <span className="text-[#FFA13D]">
             Hub
           </span>
         </Link>
-
+        
         {/* DESKTOP NAVIGATION */}
         <div className="hidden items-center gap-2 lg:flex">
           <NavLink
@@ -167,14 +187,17 @@ function Navbar() {
         <button
           type="button"
           onClick={() =>
+          //function state update menue false true
             setIsMenuOpen((previous) => !previous)
           }
           className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#F3E8D8] text-[#38340E] transition hover:border-[#FFA13D] hover:text-[#E56703] lg:hidden"
           aria-label="Open navigation menu"
         >
           {isMenuOpen ? (
+            //lucid react for mobile meue
             <X size={24} />
           ) : (
+            //for mobile
             <Menu size={24} />
           )}
         </button>

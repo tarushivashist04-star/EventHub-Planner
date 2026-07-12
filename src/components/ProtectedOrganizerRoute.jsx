@@ -1,3 +1,4 @@
+//check if organize is logged in if not then redirect to organizer login
 import { Navigate } from "react-router-dom";
 
 function ProtectedOrganizerRoute({ children }) {

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
+//it will recive props from event.js(destructuring)
 function EventCard({ event }) {
   const spotsLeft = Math.max(event.capacity - event.registered, 0);
-
+  //n
   const percentage = Math.min(
     (event.registered / event.capacity) * 100,
     100

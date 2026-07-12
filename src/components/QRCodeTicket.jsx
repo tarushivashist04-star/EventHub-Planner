@@ -1,6 +1,8 @@
+//use library
 import QRCode from "react-qr-code";
-
+//2 props event detail and attendee
 function QRCodeTicket({ event, attendee }) {
+  //here object is creted first bc qr can't gernate directly
   const ticketData = JSON.stringify({
     eventId: event.id,
     event: event.title,

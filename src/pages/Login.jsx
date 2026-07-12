@@ -5,18 +5,22 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 function Login() {
+  //navigate fun
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+//eye open n close
   const [showPassword, setShowPassword] = useState(false);
+  //if wrong pass
   const [error, setError] = useState("");
+  //login sucess
   const [success, setSuccess] = useState(false);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+//email
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -24,11 +28,12 @@ function Login() {
       ...previousData,
       [name]: value,
     }));
-
+//incorrect password
     setError("");
   }
 
   async function handleSubmit(e) {
+    //handle submit without refresh
     e.preventDefault();
 
     if (!formData.email.trim() || !formData.password.trim()) {
@@ -41,6 +46,7 @@ function Login() {
       setSuccess(false);
       setIsLoggingIn(true);
 
+    //work with async
       const userCredential = await signInWithEmailAndPassword(
         auth,
         formData.email,
@@ -59,8 +65,9 @@ function Login() {
       );
       window.dispatchEvent(new Event("student-login-change"));
 
+//login sucess
       setSuccess(true);
-
+//redirect
       setTimeout(() => {
         navigate("/");
       }, 2000);

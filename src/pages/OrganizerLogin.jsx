@@ -4,18 +4,19 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 function OrganizerLogin() {
   const navigate = useNavigate();
-
+//complete login info in one obj
   const [formData, setFormData] = useState({
     organizerId: "",
     password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  //for incorrect detail
   const [errorMessage, setErrorMessage] = useState("");
-
+//set tostore get to return
   const isOrganizerLoggedIn =
     localStorage.getItem("eventhub-organizer-auth") === "true";
-
+//react router
   if (isOrganizerLoggedIn) {
     return <Navigate to="/dashboard" replace />;
   }
@@ -30,7 +31,7 @@ function OrganizerLogin() {
 
     setErrorMessage("");
   }
-
+//fixed user here
   function handleSubmit(e) {
     e.preventDefault();
 

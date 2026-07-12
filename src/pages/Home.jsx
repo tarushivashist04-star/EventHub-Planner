@@ -5,19 +5,28 @@ import events from "../data/events";
 import { fetchEventData } from "../api/eventApi";
 
 function Home() {
+  //use array [] bc api call multiple data
   const [apiEvents, setApiEvents] = useState([]);
+
+  //controls the loading UI waiting for response api
   const [isLoading, setIsLoading] = useState(true);
+
+  //for the eroor and meaningful response
   const [apiError, setApiError] = useState("");
+
+  //0 to 4 loop for image carousel
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
 
+  //used for the featured events
   const heroEvents = events.slice(0, 5);
-
+//for Api data
   useEffect(() => {
     async function loadEventData() {
+      //before trying again if error remove that
       try {
         setIsLoading(true);
         setApiError("");
-
+      //call api fun
         const data = await fetchEventData();
         setApiEvents(data);
       } catch (error) {
@@ -26,15 +35,19 @@ function Home() {
         setApiError(
           "Unable to load campus updates. Please try again later."
         );
-      } finally {
+      } 
+      //for stop loading spinner (run always)
+      finally {
         setIsLoading(false);
       }
     }
     
-
-    loadEventData();
+     //strt of the api [run ones],
+  loadEventData();
   }, []);
+  //for hero img chng 3 sec
   useEffect(() => {
+    //for the movment pic
   const interval = setInterval(() => {
     setCurrentHeroSlide((previous) =>
       previous === heroEvents.length - 1
@@ -42,7 +55,7 @@ function Home() {
         : previous + 1
     );
   }, 3000);
-
+   //help prevent memory leak
   return () => clearInterval(interval);
 }, [heroEvents.length]);
 
@@ -156,13 +169,15 @@ function Home() {
           {/* Img area */}
           <div className="relative h-100 overflow-hidden rounded-2xl">
 
+           {/*Work according to state update image accordingly*/}
+           {/*current event slide change 0-4*/}
             <img
               src={heroEvents[currentHeroSlide].image}
               alt={heroEvents[currentHeroSlide].title}
               className="h-full w-full object-cover"
             />
 
-          
+           {/*top/b 0-right/l 0*/}
             <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
 
             {/* CATEGORY */}
@@ -187,10 +202,13 @@ function Home() {
           </div>
         </div>
 
-        {/* CAROUSEL DOTS */}
+        {/* CAROUSEL DOTS (loading part)*/}
         <div className="mt-5 flex justify-center gap-2">
+          {/*map used for every elemt of array return jsx*/}
+          {/*react create 5 button auto*/}
           {heroEvents.map((event, index) => (
             <button
+            //dot is like a button
               key={event.id}
               type="button"
               onClick={() => setCurrentHeroSlide(index)}
@@ -296,11 +314,13 @@ function Home() {
           )}
 
           {/* API DATA */}
+          {/*depend on true false condition*/}
           {!isLoading && !apiError && (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {/*map used for loop every event*/}
               {apiEvents.map((item, index) => {
                 const update = campusUpdates[index];
-
+             //show loading error or direct content
                 return (
                   <article
                     key={item.id}

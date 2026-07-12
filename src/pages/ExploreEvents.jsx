@@ -5,17 +5,22 @@ import events from "../data/events";
 
 function ExploreEvents() {
   const [search, setSearch] = useState("");
+  //in filter
   const [category, setCategory] = useState("All");
+
   const [selectedDate, setSelectedDate] = useState("");
+
   const [club, setClub] = useState("All");
+  //sort or mostpopular
   const [sortBy, setSortBy] = useState("upcoming");
 
-  // GET ORGANIZER EVENTS FROM LOCAL STORAGE
+  // GET ORGANIZER EVENTS FROM LOCAL STORAGE(event saved)
   const savedOrganizerEvents = JSON.parse(
     localStorage.getItem("eventhub-dashboard-events") || "[]"
   );
 
   // CONVERT ORGANIZER EVENTS TO EVENTCARD FORMAT
+  //map crete another array acc to choice
   const organizerEvents = savedOrganizerEvents.map((event) => ({
     ...event,
 
@@ -54,7 +59,7 @@ function ExploreEvents() {
 
   // COMBINE NORMAL EVENTS + ORGANIZER EVENTS
   const allEvents = [...organizerEvents, ...events];
-
+//remove duplicate
   const categories = [
     "All",
     ...new Set(allEvents.map((event) => event.category)),
@@ -64,6 +69,7 @@ function ExploreEvents() {
     "All",
     ...new Set(allEvents.map((event) => event.club)),
   ];
+ //if you typr lowecaseor upeercase it will show event
 
   const filteredEvents = allEvents
     .filter((event) => {
@@ -77,7 +83,8 @@ function ExploreEvents() {
         event.club
           .toLowerCase()
           .includes(search.toLowerCase());
-
+      
+          //without filter show everything with filter show specific
       const matchesCategory =
         category === "All" || event.category === category;
 
@@ -87,6 +94,7 @@ function ExploreEvents() {
       const matchesClub =
         club === "All" || event.club === club;
 
+     //if fulfil all 4 kept otherwise discard
       return (
         matchesSearch &&
         matchesCategory &&
@@ -94,14 +102,16 @@ function ExploreEvents() {
         matchesClub
       );
     })
+//largest registration kept first
     .sort((a, b) => {
+      //sort itself compalre 2
       if (sortBy === "popular") {
         return b.registered - a.registered;
       }
 
       return new Date(a.date) - new Date(b.date);
     });
-
+//reset back
   function clearFilters() {
     setSearch("");
     setCategory("All");

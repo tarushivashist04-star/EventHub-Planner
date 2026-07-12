@@ -1,3 +1,5 @@
+//responsible for opening and closing popup(sucess message,qr ticket,registration form)
+//childeran for form,sucess,qr
 function Modal({ isOpen, onClose, children }) {
   if (!isOpen) {
     return null;
@@ -15,10 +17,12 @@ function Modal({ isOpen, onClose, children }) {
           className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-[#F3E8D8] bg-[#FFF9F2] text-xl text-[#38340E] transition hover:border-[#FFA13D] hover:text-[#E56703]"
           aria-label="Close modal"
         >
+          {/*cross symbolr*/}
            &times;
         </button>
 
         {/* MODAL CONTENT */}
+        {/*everything written in the eventdeails.jsx*/}
         {children}
       </div>
 

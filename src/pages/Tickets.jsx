@@ -1,3 +1,4 @@
+//used to display the ticket of stuent and view qr ticket
 import { useState } from "react";
 import {
   CalendarDays,
@@ -9,6 +10,7 @@ import {
 import QRCodeTicket from "../components/QRCodeTicket.jsx";
 
 function Tickets() {
+  //for selecte ticket true
   const [selectedTicket, setSelectedTicket] = useState(null);
 
   // GET CURRENT LOGGED-IN STUDENT
@@ -69,6 +71,7 @@ function Tickets() {
         </div>
 
         {/* ticket CARDS */}
+        {/* map like 3 times react run sothe 3 card will be there*/}
         <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
           {savedTickets.map((ticket) => (
             <article
@@ -130,6 +133,7 @@ function Tickets() {
         </div>
 
         {/* SELECTED QR TICKET */}
+        {/*like if conditionistrue run jsx oterwise not*/}
         {selectedTicket && (
           <section className="mt-12 rounded-3xl border border-[#F3E8D8] bg-white p-6 shadow-sm md:p-10">
             <div className="mx-auto max-w-xl">

@@ -1,10 +1,13 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+//password validity,eroor message appen
 import { useState } from "react";
+//movement bw two page
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 
 function Register() {
+  //move to pages
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,13 +23,16 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-
+//for password dont matchor email exist alredy
   const [error, setError] = useState("");
+  //registration sucess
   const [success, setSuccess] = useState(false);
+  //firebase creating acc
   const [isCreating, setIsCreating] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  //e.target destructing
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -37,11 +43,11 @@ function Register() {
         ...previousData,
         phone: onlyNumbers,
       }));
-
+//ph limit exceed
       setError("");
       return;
     }
-
+   //detail is not ph no
     setFormData((previousData) => ({
       ...previousData,
       [name]: value,
@@ -49,14 +55,19 @@ function Register() {
 
     setError("");
   }
+  //when form submit
+  //firebase take time
 
   async function handleSubmit(e) {
+    //page not reload
     e.preventDefault();
-
+//return value from form
+//everry -check condition satisfy every element
+//only only is false block willnot run
     const allFieldsFilled = Object.values(formData).every(
       (value) => value.trim() !== ""
     );
-
+//error blocj
     if (!allFieldsFilled) {
       setError("Please fill in all required fields.");
       return;
@@ -76,7 +87,7 @@ function Register() {
       setError("Passwords do not match.");
       return;
     }
-
+//when details are filed and account start creat
     try {
       setError("");
       setSuccess(false);
@@ -87,10 +98,11 @@ function Register() {
         formData.email,
         formData.password
       );
-
+//for browser console
       console.log("Firebase User:", userCredential.user);
-
+//account created
       setSuccess(true);
+//return login
 
       setTimeout(() => {
         navigate("/login");
@@ -114,7 +126,7 @@ function Register() {
       setIsCreating(false);
     }
   }
-
+    //for input field
   const inputClass =
     "w-full rounded-xl border border-[#F3E8D8] bg-white px-5 py-4 text-[#38340E] outline-none transition placeholder:text-[#6D6131]/60 focus:border-[#FFA13D]";
 
@@ -151,12 +163,14 @@ function Register() {
 
         {/* Regist*/}
         <form
+        //crete account to handle submit navigate
           onSubmit={handleSubmit}
           className="mt-12 space-y-8"
         >
 
           
           <div>
+          
             <label htmlFor="fullName" className={labelClass}>
               Full Name <span className="text-red-500">*</span>
             </label>

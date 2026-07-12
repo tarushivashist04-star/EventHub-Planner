@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 
+//if there is no event dashboard look empty so we did this
 const initialEvents = [
   {
     id: 1,
@@ -41,6 +42,8 @@ const initialEvents = [
   },
 ];
 
+//blank event initially
+//when user creat event set the formdata
 const emptyForm = {
   title: "",
   category: "",
@@ -54,8 +57,10 @@ const emptyForm = {
 
 function Dashboard() {
   const navigate = useNavigate();
-
+   
+//lazy initial value used to read fromlocal storage
   const [dashboardEvents, setDashboardEvents] = useState(() => {
+    //previous saved event from browser
     const savedEvents = localStorage.getItem(
       "eventhub-dashboard-events"
     );
@@ -72,11 +77,16 @@ function Dashboard() {
   });
 
   const [formData, setFormData] = useState(emptyForm);
+  //visible show or hide form
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingEventId, setEditingEventId] = useState(null);
+  //like search hackathon
   const [searchTerm, setSearchTerm] = useState("");
+  //image uplod error in event data
   const [imageError, setImageError] = useState("");
 
+//run after rendering
+//dashboard change react run own its own
   useEffect(() => {
     try {
       localStorage.setItem(
@@ -88,31 +98,39 @@ function Dashboard() {
     }
   }, [dashboardEvents]);
 
+  //reduce many value reduce to one like registration, seats , price, no
+  //[10,20,30] return 60
+  //used for totakl registration
+
   const totalRegistrations = dashboardEvents.reduce(
     (total, event) =>
       total + Number(event.registrations || 0),
     0
   );
-
+//same work
   const totalSeats = dashboardEvents.reduce(
     (total, event) => total + Number(event.seats || 0),
     0
   );
-
+//filter use to verify thst the condition is  true
+//true one remain other discard
   const filteredEvents = dashboardEvents.filter((event) =>
     event.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
 
+    //run when logout
   function handleOrganizerLogout() {
     localStorage.removeItem("eventhub-organizer-auth");
-
+//nav to org login
     navigate("/organizer-login", {
       replace: true,
     });
   }
 
+
+     //
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -121,30 +139,38 @@ function Dashboard() {
       [name]: value,
     }));
   }
-
+//when user select image
   function handleImageChange(e) {
+    //user select file react creat a eent
+    //photo.jpeg ex
+    //[0]bc acept only 1 img
     const file = e.target.files[0];
 
+    //user selected file or not
     if (!file) {
       return;
     }
 
     setImageError("");
-
+//if not animage
     if (!file.type.startsWith("image/")) {
       setImageError("Please choose a valid image file.");
       return;
     }
-
+//don't exceed 2mb
+//kb*bytes
     if (file.size > 2 * 1024 * 1024) {
       setImageError(
         "Please choose an image smaller than 2 MB."
       );
       return;
     }
-
+//browser api
+//file reader built in js object
+//witout t react cannt see content
     const reader = new FileReader();
 
+//after read start
     reader.onloadend = () => {
       setFormData((previousData) => ({
         ...previousData,
@@ -160,14 +186,15 @@ function Dashboard() {
 
     reader.readAsDataURL(file);
   }
-
+//how form use to creat event
+//run when cret event is cliced
   function openCreateForm() {
     setFormData(emptyForm);
     setEditingEventId(null);
     setImageError("");
     setIsFormOpen(true);
   }
-
+//edit cliced
   function openEditForm(event) {
     setFormData({
       title: event.title,
@@ -184,22 +211,23 @@ function Dashboard() {
     setImageError("");
     setIsFormOpen(true);
   }
-
+//for close form
   function closeForm() {
     setFormData(emptyForm);
     setEditingEventId(null);
     setImageError("");
     setIsFormOpen(false);
   }
-
+//submit the form
   function handleSubmit(e) {
+    //stop refresh 
     e.preventDefault();
 
     if (formData.endTime <= formData.startTime) {
       alert("End time must be after the start time.");
       return;
     }
-
+//check user have selected image or not
     if (!formData.image) {
       setImageError("Please choose an event picture.");
       return;
@@ -638,7 +666,9 @@ function Dashboard() {
 
           {/* Event card */}
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-
+           
+           {/*map loop throug every elemet of array
+           */}
             {filteredEvents.map((event) => (
               <article
                 key={event.id}

@@ -1,5 +1,7 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//connect react to firebase
 import { initializeApp } from "firebase/app";
+//enable auth  email..
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
